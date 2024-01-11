@@ -1,7 +1,9 @@
 { config, inputs, pkgs, agenix, ... }:
 
 let user = "james";
-    keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p" ]; in
+    keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p" ]; 
+in
+
 {
   imports = [
     ../../modules/nixos/secrets.nix
@@ -77,6 +79,7 @@ let user = "james";
 
     hyprland = {
       enable = true;
+
       xwayland = {
         # hidpi = true;
         enable = true;
@@ -131,10 +134,9 @@ let user = "james";
     dbus.enable = true;
     gvfs.enable = true;
     tumbler.enable = true;
-
-  # Enable CUPS to print documents
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.brlaser ];
+    printing.enable = true;
+    printing.drivers = [ pkgs.brlaser ];
+  };
 
   # Enable sound
   sound.enable = true;
