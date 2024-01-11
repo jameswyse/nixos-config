@@ -34,4 +34,15 @@ _:
 
   # AI
   "diffusionbee"
+
+  "1password"
+  "rectangle"
+  "amie"
+  "postman"
+  "figma"
+  "drawio"
+  "openvpn-connect"
+  "google-drive"
+  "monitorcontrol"
+  "postgres-unofficial"
 ]

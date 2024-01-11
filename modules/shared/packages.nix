@@ -13,10 +13,13 @@ with pkgs; [
   coreutils
   cowsay
   dejavu_fonts
-  emacs-all-the-icons-fonts
+  dina-font
   fd
+  feather-font # from overlay
   ffmpeg
   figlet
+  fira-code
+  fira-code-symbols
   flyctl
   font-awesome
   git-crypt
@@ -27,18 +30,22 @@ with pkgs; [
   hunspell
   iftop
   jetbrains-mono
+  jetbrains-mono
   jq
   killall
   kitty
+  liberation_ttf
   libfido2
   meslo-lgs-nf
   neofetch
+  nerdfonts
   ngrok
   nodejs
   nodePackages.nodemon
   nodePackages.npm # globally install npm
   nodePackages.prettier
   noto-fonts
+  noto-fonts-cjk
   noto-fonts-emoji
   openssh
   pandoc

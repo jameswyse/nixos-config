@@ -19,7 +19,7 @@ in
 	    editor = "nano";
         autocrlf = "input";
       };
-      commit.gpgsign = true;
+      commit.gpgsign = false;
       pull.rebase = true;
       rebase.autoStash = true;
     };
@@ -102,7 +102,8 @@ in
       allow_remote_control = "yes";
       shell_integration = "enabled";
       macos_option_as_alt = "yes";
-      shell = "fish";
+      #shell = "fish";
+      enabled_layouts = "fat:bias=50;full_size=1;mirrored=false";
     };
     theme = "Dracula";
   };

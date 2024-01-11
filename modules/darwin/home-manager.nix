@@ -43,7 +43,13 @@ in
           additionalFiles
         ];
 
-        stateVersion = "23.11";
+        sessionVariables = {
+          EDITOR = "nano";
+          VISUAL = "code";
+          SHELL = "fish";
+        };
+
+        stateVersion = "21.05";
       };
       programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; };
 
@@ -65,9 +71,13 @@ in
         { path = "/Applications/Visual Studio Code.app/"; }
         { path = "${pkgs.kitty}/Applications/Kitty.app/"; }
         { path = "/Applications/GitHub Desktop.app/"; }
-        # Cron
+        { path = "/Applications/Postman.app/"; }
+        { path = "/Applications/Amie.app/"; }
+        { path = "/Applications/Music.app/"; }
         { path = "/Applications/Notes.app/"; }
+        { path = "/Applications/Notion.app/"; }
         { path = "/Applications/Zoom.us.app/"; }
+        { path = "/Applications/System Settings.app/"; }
         {
           path = "${config.users.users.${user}.home}/Downloads";
           section = "others";

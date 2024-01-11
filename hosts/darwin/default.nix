@@ -44,6 +44,8 @@ let user = "james"; in
     };
   };
 
+  environment.shells = with pkgs; [ fish ];
+
   # Turn off NIX_PATH warnings now that we're using flakes
   system.checks.verifyNixPath = false;
 
@@ -74,6 +76,7 @@ let user = "james"; in
       NSGlobalDomain = {
         AppleShowAllExtensions = true;
         ApplePressAndHoldEnabled = false;
+        AppleInterfaceStyle = "Dark";
 
         # 120, 90, 60, 30, 12, 6, 2
         KeyRepeat = 2;
@@ -86,20 +89,31 @@ let user = "james"; in
         "com.apple.sound.beep.feedback" = 0;
       };
 
+      SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+
       dock = {
         autohide = false;
         show-recents = false;
         launchanim = true;
         orientation = "bottom";
-        tilesize = 48;
+        tilesize = 64;
+        appswitcher-all-displays = true;
+        wvous-tr-corner = 10;
+        wvous-bl-corner = 4;
       };
 
       finder = {
+        ShowStatusBar = true;
+        FXPreferredViewStyle ="Nlsv";
+        AppleShowAllExtensions = true;
+        QuitMenuItem = true;
+        FXEnableExtensionChangeWarning = false;
         _FXShowPosixPathInTitle = false;
       };
 
       trackpad = {
         Clicking = true;
+        TrackpadRightClick = true;
         TrackpadThreeFingerDrag = true;
       };
     };
