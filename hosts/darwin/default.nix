@@ -1,4 +1,4 @@
-{ agenix, config, pkgs, ... }:
+{ agenix, config, nix-vscode-extensions, pkgs, ... }:
 
 let user = "james"; in
 
@@ -29,7 +29,7 @@ let user = "james"; in
 
     # Turn this on to make command line easier
     extraOptions = ''
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes configurable-impure-env auto-allocate-uids
     '';
   };
 

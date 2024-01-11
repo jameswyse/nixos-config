@@ -1,4 +1,4 @@
-{ config, pkgs, lib, home-manager, ... }:
+{ config, pkgs, lib, home-manager, nix-vscode-extensions, ... }:
 
 let
   user = "james";
@@ -51,7 +51,7 @@ in
 
         stateVersion = "21.05";
       };
-      programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; };
+      programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; vscode-extensions = nix-vscode-extensions.extensions.aarch64-darwin; };
 
       # Marked broken Oct 20, 2022 check later to remove this
       # https://github.com/nix-community/home-manager/issues/3344

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, vscode-extensions, lib, ... }:
 
 let name = "James Wyse";
     user = "james";
@@ -73,11 +73,10 @@ in
       ''
       (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
         ''
-          IdentityFile /home/${user}/.ssh/id_github
+          IdentityFile /home/${user}/.ssh/id_ed25519
         '')
       (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
         ''
-          IdentityFile /Users/${user}/.ssh/id_github
           IdentityFile /Users/${user}/.ssh/id_ed25519
         '')
     ];
@@ -110,8 +109,60 @@ in
 
   vscode = {
     enable = true;
+    #package = pkgs.vscodium;
+
+    enableExtensionUpdateCheck = false;
+    enableUpdateCheck = false;
+    mutableExtensionsDir = false;
+
+    extensions = with vscode-extensions.vscode-marketplace; [
+      jnoortheen.nix-ide
+      catppuccin.catppuccin-vsc
+      catppuccin.catppuccin-vsc-icons
+      roman.ayu-next
+      adpyke.vscode-sql-formatter
+      dbaeumer.vscode-eslint
+      dotenv.dotenv-vscode
+      dsznajder.es7-react-js-snippets
+      eamodio.gitlens
+      ecmel.vscode-html-css
+      esbenp.prettier-vscode
+      mgmcdermott.vscode-language-babel
+      mquandalle.graphql
+      ms-azuretools.vscode-docker
+      ms-python.isort
+      ms-python.python
+      ms-python.vscode-pylance
+      rvest.vs-code-prettier-eslint
+      tamasfe.even-better-toml
+    ];
+# ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+#      {
+#        name = "mayukaithemevsc";
+#        publisher = "GulajavaMinistudio";
+#        version = "3.2.3";
+#        sha256 = "a0f3c30a3d16e06c31766fbe2c746d80683b6211638b00b0753983a84fbb9dad";
+#      }
+#    ];
+
     userSettings = {
-      "window.titleBarStyle" = "custom";
+      "workbench.iconTheme" = "catppuccin-macchiato";
+      "workbench.colorTheme" = "Mayukai Semantic Mirage";
+      
+      "editor.fontFamily" = "'Fira Code', 'Droid Sans Mono', 'monospace', monospace";
+      
+      "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "nil";
+      "nix.formatterPath" = "nixpkgs-fmt";
+      "nix.serverSettings" = {
+        "nil" = {
+          "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
+        };
+      };
+
+      "git.enableCommitSigning" = false;
+#      "files.autoSave" = "afterDelay";
+#      "files.autoSaveDelay" = 100;
     };
   };
 

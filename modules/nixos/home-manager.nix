@@ -1,9 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, nix-vscode-extensions, ... }:
 
 let
   user = "james";
   xdg_configHome  = "/home/${user}/.config";
-  shared-programs = import ../shared/home-manager.nix { inherit config pkgs lib; };
+  shared-programs = import ../shared/home-manager.nix { inherit config pkgs lib; vscode-extensions = nix-vscode-extensions.extensions.x86_64-linux; };
   shared-files = import ../shared/files.nix { inherit config pkgs; };
 
 in

@@ -22,7 +22,8 @@
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
-    }; 
+    };
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,7 +33,7 @@
       flake = false;
     };
   };
-  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, disko, agenix, secrets } @inputs:
+  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, nix-vscode-extensions, disko, agenix, secrets } @inputs:
     let
       user = "james";
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];

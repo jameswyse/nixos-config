@@ -6,7 +6,6 @@ _:
   "insomnia"
   "ngrok"
   "postico"
-  "visual-studio-code"
   "github"
 
   # Communication Tools

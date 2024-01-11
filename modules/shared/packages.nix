@@ -1,6 +1,7 @@
 { pkgs }:
 
 with pkgs; [
+  _1password
   act
   age
   aspell
@@ -40,6 +41,8 @@ with pkgs; [
   neofetch
   nerdfonts
   ngrok
+  nil # Nix LSP
+  nixpkgs-fmt
   nodejs
   nodePackages.nodemon
   nodePackages.npm # globally install npm
