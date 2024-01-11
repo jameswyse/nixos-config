@@ -113,10 +113,6 @@ in
     };
   };
 
-  chromium = {
-    enable = true;
-  };
-
   tmux = {
     enable = true;
     plugins = with pkgs.tmuxPlugins; [
