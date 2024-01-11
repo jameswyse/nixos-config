@@ -33,6 +33,16 @@ let user = "james"; in
     '';
   };
 
+  programs = {
+    fish.enable = true;
+  };
+
+  users.users = {
+    ${user} = {
+      shell = pkgs.fish;
+      openssh.authorizedKeys.keys = keys;
+    };
+
   # Turn off NIX_PATH warnings now that we're using flakes
   system.checks.verifyNixPath = false;
 
