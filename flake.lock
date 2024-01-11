@@ -88,11 +88,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1704741201,
-        "narHash": "sha256-Y420NeqPWRSpxHpXsxhKILfTxT5exjtTgCgDwSpcEfU=",
+        "lastModified": 1704936146,
+        "narHash": "sha256-hRX7d4F83/cUeV/r0sD2mhrhw0Hb9Sm99jqL0ym7euQ=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "f0a3425a7b173701922e7959d8bfb136ef53aa54",
+        "rev": "11f4ed104180e8555c13d2350c1d6c262f8b0765",
         "type": "github"
       },
       "original": {
@@ -177,11 +177,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1704923183,
-        "narHash": "sha256-W9OGSesCyfieiuNoDiDb+QSuN1+a8Wm88i6UiFwTC6U=",
+        "lastModified": 1704935775,
+        "narHash": "sha256-YusAR0cov02EV7LASj3raTS3hAngtLKUdY23Zifjo8M=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "e9e1c617d08805b39dfd9b91e54689270f88f469",
+        "rev": "38306c7a42c0b4542f7574dd1cc8fc718af0546d",
         "type": "github"
       },
       "original": {
@@ -193,11 +193,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1704925149,
-        "narHash": "sha256-vTtytuZcbT7IvF5+47v52BPeRBXM/lqL+WRPwbk+2KQ=",
+        "lastModified": 1704936348,
+        "narHash": "sha256-EiIhXQBeGT7AYj9om+EytYXok9IiumgfJiaJ5+paMXw=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "15a510573a33c7ecc4c0e738b359642517a4c0e1",
+        "rev": "f68afc1433bf9bc07b2e3e54313ffdb1f46f7a78",
         "type": "github"
       },
       "original": {
@@ -332,7 +332,24 @@
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "nix-homebrew": "nix-homebrew",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_5",
+        "secrets": "secrets"
+      }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704939033,
+        "narHash": "sha256-Km68kjnEPYLSxySxjeWcyqrYFW3hFudskuJokcd35/c=",
+        "ref": "refs/heads/master",
+        "rev": "22443c8e70695b26f18495fb994b2694cb34a248",
+        "revCount": 1,
+        "type": "git",
+        "url": "ssh://git@github.com/jameswyse/nix-secrets.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/jameswyse/nix-secrets.git"
       }
     },
     "systems": {
