@@ -10,10 +10,10 @@
   # };
 
   ".config/neofetch.conf" = {
-    text = builtins.readFile ./config/neofetch.conf;
+    text = builtins.readFile config/neofetch.conf;
   };
 
   ".config/starship.toml" = {
-    text = builtins.readFile ./config/starship.toml;
+    text = builtins.readFile config/starship.toml;
   };
 }

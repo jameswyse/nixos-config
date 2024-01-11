@@ -8,19 +8,19 @@ let
 {
 
   "${xdg_configHome}/hypr/animations.conf" = {
-    text = builtins.readFile ./config/hypr/animations.conf;
+    text = builtins.readFile config/hypr/animations.conf;
   };
   "${xdg_configHome}/hypr/autostart.conf" = {
-    text = builtins.readFile ./config/hypr/autostart.conf;
+    text = builtins.readFile config/hypr/autostart.conf;
   };
   "${xdg_configHome}/hypr/keybindings.conf" = {
-    text = builtins.readFile ./config/hypr/keybindings.conf;
+    text = builtins.readFile config/hypr/keybindings.conf;
   };
   "${xdg_configHome}/hypr/theme.conf" = {
-    text = builtins.readFile ./config/hypr/theme.conf;
+    text = builtins.readFile config/hypr/theme.conf;
   };
   "${xdg_configHome}/hypr/hyprland.conf" = {
-    text = builtins.readFile ./config/hypr/hyprland.conf;
+    text = builtins.readFile config/hypr/hyprland.conf;
   };
 
   "${xdg_dataHome}/bin/autohypr" = {
@@ -44,13 +44,13 @@ let
     '';
   };
 
-  "${xdg_configHome}/rofi/colors.rasi".text = builtins.readFile ./config/rofi/colors.rasi;
-  "${xdg_configHome}/rofi/confirm.rasi".text = builtins.readFile ./config/rofi/confirm.rasi;
-  "${xdg_configHome}/rofi/launcher.rasi".text = builtins.readFile ./config/rofi/launcher.rasi;
-  "${xdg_configHome}/rofi/message.rasi".text = builtins.readFile ./config/rofi/message.rasi;
-  "${xdg_configHome}/rofi/networkmenu.rasi".text = builtins.readFile ./config/rofi/networkmenu.rasi;
-  "${xdg_configHome}/rofi/powermenu.rasi".text = builtins.readFile ./config/rofi/powermenu.rasi;
-  "${xdg_configHome}/rofi/styles.rasi".text = builtins.readFile ./config/rofi/styles.rasi;
+  "${xdg_configHome}/rofi/colors.rasi".text = builtins.readFile config/rofi/colors.rasi;
+  "${xdg_configHome}/rofi/confirm.rasi".text = builtins.readFile config/rofi/confirm.rasi;
+  "${xdg_configHome}/rofi/launcher.rasi".text = builtins.readFile config/rofi/launcher.rasi;
+  "${xdg_configHome}/rofi/message.rasi".text = builtins.readFile config/rofi/message.rasi;
+  "${xdg_configHome}/rofi/networkmenu.rasi".text = builtins.readFile config/rofi/networkmenu.rasi;
+  "${xdg_configHome}/rofi/powermenu.rasi".text = builtins.readFile config/rofi/powermenu.rasi;
+  "${xdg_configHome}/rofi/styles.rasi".text = builtins.readFile config/rofi/styles.rasi;
 
   "${xdg_configHome}/rofi/bin/launcher.sh" = {
     executable = true;
