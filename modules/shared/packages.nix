@@ -29,6 +29,7 @@ with pkgs; [
   jetbrains-mono
   jq
   killall
+  kitty
   libfido2
   meslo-lgs-nf
   neofetch
