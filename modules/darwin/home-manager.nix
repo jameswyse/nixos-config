@@ -71,10 +71,6 @@ in
         { path = "/System/Applications/TV.app/"; }
         { path = "/System/Applications/Home.app/"; }
         {
-          path = toString myEmacsLauncher;
-          section = "others";
-        }
-        {
           path = "${config.users.users.${user}.home}/.local/share/";
           section = "others";
           options = "--sort name --view grid --display folder";
