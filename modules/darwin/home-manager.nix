@@ -67,7 +67,7 @@ in
         { path = "/Applications/GitHub Desktop.app/"; }
         # Cron
         { path = "/Applications/Notes.app/"; }
-        { path = "/Applications/Zoom.app/"; }
+        { path = "/Applications/Zoom.us.app/"; }
         {
           path = "${config.users.users.${user}.home}/Downloads";
           section = "others";
