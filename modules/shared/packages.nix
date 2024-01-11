@@ -42,7 +42,6 @@ with pkgs; [
   noto-fonts-emoji
   openssh
   pandoc
-  powertop
   python39
   python39Packages.virtualenv # globally install virtualenv
   ranger

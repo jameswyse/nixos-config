@@ -37,6 +37,7 @@ shared-packages ++ [
   pinentry-qt
   playerctl # Control media players from command line
   postgresql
+  powertop
   ripgrep
   rnix-lsp # lsp-mode for nix
   rofi
