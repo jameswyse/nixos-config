@@ -13,7 +13,7 @@ in
     username = "${user}";
     homeDirectory = "/home/${user}";
     packages = pkgs.callPackage ./packages.nix {};
-    file = shared-files // import ./files.nix { inherit user; };
+    file = shared-files // import ./files.nix { inherit user config lib pkgs; };
     stateVersion = "21.05";
 
     sessionVariables = {
