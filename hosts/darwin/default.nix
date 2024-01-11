@@ -40,7 +40,7 @@ let user = "james"; in
   users.users = {
     ${user} = {
       shell = pkgs.fish;
-      openssh.authorizedKeys.keys = keys;
+      # openssh.authorizedKeys.keys = keys;
     };
   };
 
