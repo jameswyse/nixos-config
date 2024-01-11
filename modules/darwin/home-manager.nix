@@ -28,8 +28,6 @@ in
     # $ mas search <app name>
     #
     masApps = {
-      "1password" = 1333542190;
-      "wireguard" = 1451685025;
     };
   };
 
