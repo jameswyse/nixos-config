@@ -33,7 +33,7 @@ shared-packages ++ [
   pavucontrol
   pavucontrol # Pulse audio controls
   pcmanfm
-  pinentry-curses
+  # pinentry-curses
   pinentry-qt
   playerctl # Control media players from command line
   postgresql
