@@ -7,7 +7,7 @@ _:
   "ngrok"
   "postico"
   "visual-studio-code"
-  "github-desktop"
+  "github"
 
   # Communication Tools
   "discord"
