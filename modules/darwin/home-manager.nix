@@ -63,7 +63,7 @@ in
         { path = "/Applications/Slack.app/"; }
         { path = "/Applications/Google Chrome.app/"; }
         { path = "/Applications/Visual Studio Code.app/"; }
-        { path = "${pkgs.kitty}/Applications/Kitty.app/"; }
+        { path = "/Applications/Kitty.app/"; }
         { path = "/Applications/GitHub Desktop.app/"; }
         # Cron
         { path = "/Applications/Notes.app/"; }
