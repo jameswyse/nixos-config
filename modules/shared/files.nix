@@ -10,6 +10,6 @@
   # };
 
   ".config/neofetch.conf" = {
-    text = builtins.readFile config/neofetch.conf;
+    text = builtins.readFile ../../config/neofetch.conf;
   };
 }
