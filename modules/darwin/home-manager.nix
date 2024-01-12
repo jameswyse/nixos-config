@@ -28,6 +28,7 @@ in
     # $ mas search <app name>
     #
     masApps = {
+      "harvest" = 506189836;
     };
   };
 
@@ -65,7 +66,7 @@ in
       enable = true;
       entries = [
         { path = "/System/Applications/Messages.app/"; }
-        # Spark
+        { path = "/Applications/Spark Desktop.app/"; }
         { path = "/Applications/Slack.app/"; }
         { path = "/Applications/Google Chrome.app/"; }
         { path = "/Applications/Visual Studio Code.app/"; }

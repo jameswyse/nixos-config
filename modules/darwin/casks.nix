@@ -1,47 +1,34 @@
 _:
 
 [
-  # Development Tools
+  "1password"
+  "amie"
+  "appcleaner"
+  "asana"
+  "diffusionbee"
+  "discord"
+  "drawio"
+  "figma"
+  "github"
+  "google-chrome"
+  "google-drive"
   "homebrew/cask/docker"
   "insomnia"
-  "ngrok"
-  "postico"
-  "github"
-
-  # Communication Tools
-  "discord"
   "loom"
-  "notion"
-  "slack"
-  "telegram"
-  "zoom"
-
-  # Utility Tools
-  "appcleaner"
-  "syncthing"
-
-  # Entertainment Tools
-  "steam"
-  "vlc"
-
-  # Productivity Tools
-  "raycast"
-  "asana"
-
-  # Browsers
-  "google-chrome"
-
-  # AI
-  "diffusionbee"
-
-  "1password"
-  "rectangle"
-  "amie"
-  "postman"
-  "figma"
-  "drawio"
-  "openvpn-connect"
-  "google-drive"
   "monitorcontrol"
+  "ngrok"
+  "notion"
+  "openvpn-connect"
   "postgres-unofficial"
+  "postico"
+  "postman"
+  "raycast"
+  "readdle-spark"
+  "rectangle"
+  "slack"
+  "steam"
+  "syncthing"
+  "telegram"
+  "vlc"
+  "zoom"
 ]

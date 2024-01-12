@@ -59,7 +59,7 @@ in
     settings.auto-optimise-store = true;
     package = pkgs.nixUnstable;
     extraOptions = ''
-      experimental-features = nix-command flakes configurable-impure-env auto-allocate-uids
+      experimental-features = nix-command flakes auto-allocate-uids
     '';
    };
 

@@ -69,7 +69,13 @@ in
         }
       }
 
-      $env.PATH = ($env.PATH | split row (char esep) | prepend /home/james/.apps | append /usr/bin/env)
+      $env.PATH = ($env.PATH | split row (char esep)
+        | prepend /home/james/.apps 
+        | prepend /home/james/.nix-profile/bin
+        | prepend /Users/james/.nix-profile/bin 
+        | prepend /nix/var/nix/profiles/default/bin 
+        | prepend /run/current-system/sw/bin
+        | append /usr/bin/env)
 
       def projects [] { (ls ~/Projects | get name | path basename) }
       def --env c [project: string@projects = ""] { cd $'~/Projects/($project)' }

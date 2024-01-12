@@ -29,7 +29,7 @@ let user = "james"; in
 
     # Turn this on to make command line easier
     extraOptions = ''
-      experimental-features = nix-command flakes configurable-impure-env auto-allocate-uids
+      experimental-features = nix-command flakes auto-allocate-uids
     '';
   };
 
