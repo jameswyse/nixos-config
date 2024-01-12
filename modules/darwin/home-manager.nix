@@ -14,7 +14,7 @@ in
     name = "${user}";
     home = "/Users/${user}";
     isHidden = false;
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
   };
 
   homebrew = {
@@ -46,7 +46,7 @@ in
         sessionVariables = {
           EDITOR = "nano";
           VISUAL = "code";
-          SHELL = "fish";
+          SHELL = "nu";
         };
 
         stateVersion = "21.05";

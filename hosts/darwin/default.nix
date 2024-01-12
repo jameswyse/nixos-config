@@ -39,12 +39,12 @@ let user = "james"; in
 
   users.users = {
     ${user} = {
-      shell = pkgs.fish;
+      shell = pkgs.nushell;
       # openssh.authorizedKeys.keys = keys;
     };
   };
 
-  environment.shells = with pkgs; [ fish ];
+  environment.shells = with pkgs; [ fish nushell ];
 
   # Turn off NIX_PATH warnings now that we're using flakes
   system.checks.verifyNixPath = false;
