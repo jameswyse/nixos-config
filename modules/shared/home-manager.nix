@@ -71,7 +71,8 @@ in
 
       $env.PATH = ($env.PATH | split row (char esep) | prepend /home/james/.apps | append /usr/bin/env)
 
-      def --env c [project: string] { cd $'~/Projects/($project)' }
+      def projects [] { (ls ~/Projects | get name | path basename) }
+      def --env c [project: string@projects = ""] { cd $'~/Projects/($project)' }
     '';
     shellAliases = {
     };
