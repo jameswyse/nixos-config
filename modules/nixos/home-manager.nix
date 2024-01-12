@@ -139,6 +139,28 @@ in
     wlogout = {
       enable = true;
     };
+    mpv = {
+      enable = true;
+      config = {
+        hwdec = "auto-safe";
+        
+        fullscreen = true;
+        fs-screen = 0;
+        screen = 0;
+        window-maximized = "yes";
+        keep-open = "no";
+        
+        profile = "gpu-hq";
+        ytdl-format = "bestvideo+bestaudio";
+        scale = "ewa_lanczossharp";
+        cscale = "ewa_lanczossharp";
+        deband = true;
+        
+        interpolation = false;
+        video-sync = "display-resample-vdrop";
+        tscale = "oversample";
+      };
+    }; 
     waybar = {
       enable = true;
       package = pkgs.waybar;

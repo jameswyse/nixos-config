@@ -28,6 +28,8 @@ in
     kernelModules = [ "uinput" "amdgpu" "kvm-intel" ];
   };
 
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance"; # powersave
+
   time.timeZone = "Australia/Brisbane";
   i18n.defaultLocale = "en_AU.UTF-8";
   i18n.extraLocaleSettings = {
@@ -79,9 +81,14 @@ in
         enable = true;
       };
     };
-
-    steam.enable = true;
   };
+
+  # Gaming
+  hardware.steam-hardware.enable = true;
+  services.ratbagd.enable = true;
+  programs.steam.enable = true;
+  programs.gamemode.enable = true;
+  programs.gamescope.enable = true;
 
   services = {
     xserver = {
@@ -174,7 +181,7 @@ in
         "wheel"
         "docker"
       ];
-      shell = pkgs.fish;
+      shell = pkgs.nushell;
       openssh.authorizedKeys.keys = keys;
     };
 
@@ -225,6 +232,16 @@ in
     lm_sensors
     clinfo
     glmark2
+    wineWowPackages.waylandFull
+    lutris
+    playonlinux
+    bottles
+    heroic
+    piper
+    prismlauncher
+    jdk17
+    jdk11
+    jdk8
   ];
 
   system.stateVersion = "21.05"; # Don't change this
