@@ -81,7 +81,7 @@
       darwinConfigurations = let user = "james"; in {
         macos = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = inputs;
+          specialArgs = { inherit user; } // inputs;
           modules = [
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
@@ -105,16 +105,10 @@
 
       nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (system: nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = inputs;
+        specialArgs = { inherit user; } // inputs;
         modules = [
           disko.nixosModules.disko
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${user} = import ./modules/nixos/home-manager.nix { inherit nix-vscode-extensions; };
-            };
-          }
+          home-manager.nixosModules.home-manager
           ./hosts/nixos
         ];
      });

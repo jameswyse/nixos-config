@@ -8,6 +8,7 @@ in
   imports = [
     ../../modules/nixos/secrets.nix
     ../../modules/nixos/disk-config.nix
+    ../../modules/nixos/home-manager.nix
     ../../modules/shared
     ../../modules/shared/cachix
     agenix.nixosModules.default
