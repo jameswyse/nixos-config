@@ -112,7 +112,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.${user} = import ./modules/nixos/home-manager.nix;
+              users.${user} = import ./modules/nixos/home-manager.nix { inherit nix-vscode-extensions; };
             };
           }
           ./hosts/nixos
