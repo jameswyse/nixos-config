@@ -30,6 +30,7 @@ with pkgs; [
   htop
   hunspell
   iftop
+  iperf
   jetbrains-mono
   jetbrains-mono
   jq
