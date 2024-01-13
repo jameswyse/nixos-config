@@ -52,6 +52,7 @@ in
     hostName = "nixos";
     useDHCP = false;
     interfaces."enp6s18".useDHCP = true;
+    firewall.enable = false;
   };
 
   nix = {
