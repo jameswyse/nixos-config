@@ -79,6 +79,12 @@ in
 
       def projects [] { (ls ~/Projects | get name | path basename) }
       def --env c [project: string@projects = ""] { cd $'~/Projects/($project)' }
+
+      use ${pkgs.nu_scripts}/share/nu_scripts/modules/fnm/fnm.nu
+      use ${pkgs.nu_scripts}/share/nu_scripts/modules/nix/nix.nu
+      use ${pkgs.nu_scripts}/share/nu_scripts/modules/git/git.nu
+      use ${pkgs.nu_scripts}/share/nu_scripts/modules/network/ssh.nu
+
     '';
     shellAliases = {
     };
@@ -91,6 +97,7 @@ in
 
   starship = {
     enable = true;
+    enableNushellIntegration = true;
     settings = pkgs.lib.importTOML ../../config/starship.toml;
   };
 

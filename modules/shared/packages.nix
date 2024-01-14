@@ -22,6 +22,7 @@ with pkgs; [
   fira-code
   fira-code-symbols
   flyctl
+  fnm
   font-awesome
   git-crypt
   git-lfs
@@ -51,6 +52,7 @@ with pkgs; [
   noto-fonts
   noto-fonts-cjk
   noto-fonts-emoji
+  nu_scripts
   nushell
   openssh
   pandoc
@@ -65,5 +67,6 @@ with pkgs; [
   unrar
   unzip
   wget
+  yarn
   zip
 ]
