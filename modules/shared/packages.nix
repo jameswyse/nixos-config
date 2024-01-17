@@ -9,7 +9,6 @@ with pkgs; [
   awscli2
   bash-completion
   bat
-  btop
   cmatrix
   coreutils
   cowsay

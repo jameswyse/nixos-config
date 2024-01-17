@@ -7,6 +7,7 @@ shared-packages ++ [
   appimage-run
   bc # old school calculator
   bibata-cursors
+  btop
   cava # Terminal audio visualizer
   cider # Apple Music on Linux
   cliphist
