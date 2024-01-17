@@ -7,7 +7,7 @@ let
 in
 {
   imports = [
-   ./dock
+    ./dock
   ];
 
   users.users.${user} = {
@@ -19,7 +19,15 @@ in
 
   homebrew = {
     enable = true;
-    casks = pkgs.callPackage ./casks.nix {};
+    taps = [ ];
+    brews = [
+      # {
+      #   name = "redis";
+      #   start_service = true;
+      #   restart_service = true;
+      # }
+    ];
+    casks = pkgs.callPackage ./casks.nix { };
 
     # These app IDs are from using the mas CLI app
     # https://github.com/mas-cli/mas
@@ -35,10 +43,10 @@ in
   # Enable home-manager
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, config, lib, ... }:{
+    users.${user} = { pkgs, config, lib, ... }: {
       home = {
         enableNixpkgsReleaseCheck = false;
-        packages = pkgs.callPackage ./packages.nix {};
+        packages = pkgs.callPackage ./packages.nix { };
         file = lib.mkMerge [
           sharedFiles
           additionalFiles
@@ -52,7 +60,7 @@ in
 
         stateVersion = "21.05";
       };
-      programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; vscode-extensions = nix-vscode-extensions.extensions.aarch64-darwin; };
+      programs = { } // import ../shared/home-manager.nix { inherit config pkgs lib; vscode-extensions = nix-vscode-extensions.extensions.aarch64-darwin; };
 
       # Marked broken Oct 20, 2022 check later to remove this
       # https://github.com/nix-community/home-manager/issues/3344
@@ -61,7 +69,7 @@ in
   };
 
   # Fully declarative dock using the latest from Nix Store
-  local = { 
+  local = {
     dock = {
       enable = true;
       entries = [

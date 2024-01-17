@@ -1,8 +1,9 @@
 { config, pkgs, vscode-extensions, lib, ... }:
 
-let name = "James Wyse";
-    user = "james";
-    email = "james@jameswyse.net"; 
+let
+  name = "James Wyse";
+  user = "james";
+  email = "james@jameswyse.net";
 in
 {
   git = {
@@ -15,8 +16,8 @@ in
     };
     extraConfig = {
       init.defaultBranch = "main";
-      core = { 
-	    editor = "nano";
+      core = {
+        editor = "nano";
         autocrlf = "input";
       };
       commit.gpgsign = false;
@@ -44,7 +45,7 @@ in
     };
   };
 
-  nushell = { 
+  nushell = {
     enable = true;
     # configFile.source = ./.../config.nu;
     extraConfig = ''
@@ -75,7 +76,14 @@ in
         | prepend /Users/james/.nix-profile/bin 
         | prepend /nix/var/nix/profiles/default/bin 
         | prepend /run/current-system/sw/bin
+        | prepend /opt/homebrew/bin
+        | prepend /opt/homebrew/sbin
+        | append /Applications/Postgres.app/Contents/Versions/16/bin
         | append /usr/bin/env)
+
+      $env.HOMEBREW_PREFIX = "/opt/homebrew"
+      $env.HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
+      $env.HOMEBREW_REPOSITORY = "/opt/homebrew/Library/.homebrew-is-managed-by-nix"
 
       def projects [] { (ls ~/Projects | get name | path basename) }
       def --env c [project: string@projects = ""] { cd $'~/Projects/($project)' }
@@ -86,8 +94,7 @@ in
       use ${pkgs.nu_scripts}/share/nu_scripts/modules/network/ssh.nu
 
     '';
-    shellAliases = {
-    };
+    shellAliases = { };
   };
 
   carapace = {
@@ -188,21 +195,21 @@ in
       rvest.vs-code-prettier-eslint
       tamasfe.even-better-toml
     ];
-# ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-#      {
-#        name = "mayukaithemevsc";
-#        publisher = "GulajavaMinistudio";
-#        version = "3.2.3";
-#        sha256 = "a0f3c30a3d16e06c31766fbe2c746d80683b6211638b00b0753983a84fbb9dad";
-#      }
-#    ];
+    # ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    #      {
+    #        name = "mayukaithemevsc";
+    #        publisher = "GulajavaMinistudio";
+    #        version = "3.2.3";
+    #        sha256 = "a0f3c30a3d16e06c31766fbe2c746d80683b6211638b00b0753983a84fbb9dad";
+    #      }
+    #    ];
 
     userSettings = {
       "workbench.iconTheme" = "catppuccin-macchiato";
       "workbench.colorTheme" = "Mayukai Semantic Mirage";
-      
+
       "editor.fontFamily" = "'Fira Code', 'Droid Sans Mono', 'monospace', monospace";
-      
+
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
       "nix.formatterPath" = "nixpkgs-fmt";
@@ -213,8 +220,10 @@ in
       };
 
       "git.enableCommitSigning" = false;
-#      "files.autoSave" = "afterDelay";
-#      "files.autoSaveDelay" = 100;
+      "editor.formatOnPaste" = true;
+      "editor.formatOnSave" = true;
+      #      "files.autoSave" = "afterDelay";
+      #      "files.autoSaveDelay" = 100;
     };
   };
 
@@ -228,7 +237,7 @@ in
       {
         plugin = power-theme;
         extraConfig = ''
-           set -g @tmux_power_theme 'gold'
+          set -g @tmux_power_theme 'gold'
         '';
       }
       {
@@ -299,6 +308,6 @@ in
       bind-key -T copy-mode-vi 'C-k' select-pane -U
       bind-key -T copy-mode-vi 'C-l' select-pane -R
       bind-key -T copy-mode-vi 'C-\' select-pane -l
-      '';
-    };
+    '';
+  };
 }

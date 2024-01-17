@@ -15,6 +15,7 @@ _:
   "homebrew/cask/docker"
   "insomnia"
   "loom"
+  "miro"
   "monitorcontrol"
   "ngrok"
   "notion"
@@ -30,5 +31,6 @@ _:
   "syncthing"
   "telegram"
   "vlc"
+  "zeplin"
   "zoom"
 ]

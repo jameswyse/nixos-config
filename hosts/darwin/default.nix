@@ -9,7 +9,7 @@ let user = "james"; in
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
     ../../modules/shared/cachix
-     agenix.darwinModules.default
+    agenix.darwinModules.default
   ];
 
   # Auto upgrade nix package and the daemon service.
@@ -36,6 +36,9 @@ let user = "james"; in
   programs = {
     fish.enable = true;
   };
+
+  services.redis.enable = true;
+  services.redis.dataDir = "/var/lib/redis";
 
   users.users = {
     ${user} = {
@@ -104,7 +107,7 @@ let user = "james"; in
 
       finder = {
         ShowStatusBar = true;
-        FXPreferredViewStyle ="Nlsv";
+        FXPreferredViewStyle = "Nlsv";
         AppleShowAllExtensions = true;
         QuitMenuItem = true;
         FXEnableExtensionChangeWarning = false;

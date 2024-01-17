@@ -1,7 +1,8 @@
 { config, inputs, lib, pkgs, nix-vscode-extensions, agenix, ... }:
 
-let user = "james";
-    keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p" ]; 
+let
+  user = "james";
+  keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p" ];
 in
 
 {
@@ -23,7 +24,7 @@ in
       };
       efi.canTouchEfiVariables = true;
     };
-    initrd.availableKernelModules = [ "xhci_pci" "uhci_hcd" "ehci_pci" "ahci" "nvme" "usbhid" "usb_storage" "virtio_scsi" "virtio_pci"  "sd_mod" "sr_mod" ];
+    initrd.availableKernelModules = [ "xhci_pci" "uhci_hcd" "ehci_pci" "ahci" "nvme" "usbhid" "usb_storage" "virtio_scsi" "virtio_pci" "sd_mod" "sr_mod" ];
 
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "uinput" "amdgpu" "kvm-intel" ];
@@ -36,7 +37,7 @@ in
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_AU.UTF-8";
     LC_IDENTIFICATION = "en_AU.UTF-8";
-    LC_MEASUREMENT = "en_AU.UTF-8"; 
+    LC_MEASUREMENT = "en_AU.UTF-8";
     LC_MONETARY = "en_AU.UTF-8";
     LC_NAME = "en_AU.UTF-8";
     LC_NUMERIC = "en_AU.UTF-8";
@@ -63,7 +64,7 @@ in
     extraOptions = ''
       experimental-features = nix-command flakes auto-allocate-uids
     '';
-   };
+  };
 
   # Manages keys and such
   programs = {
@@ -108,7 +109,7 @@ in
       };
 
       layout = "us";
-      xkbOptions = "ctrl:nocaps";  # Turn Caps Lock into Ctrl
+      xkbOptions = "ctrl:nocaps"; # Turn Caps Lock into Ctrl
       libinput.enable = true;
     };
 
@@ -129,7 +130,7 @@ in
       overrideDevices = true;
 
       settings = {
-        devices = {};
+        devices = { };
         options.globalAnnounceEnabled = false; # Only sync on LAN
       };
     };
@@ -172,7 +173,7 @@ in
     ledger.enable = true;
   };
 
- # Add docker daemon
+  # Add docker daemon
   virtualisation.docker.enable = true;
   virtualisation.docker.logDriver = "json-file";
 
@@ -197,9 +198,9 @@ in
     enable = true;
     extraRules = [{
       commands = [
-       {
-         command = "${pkgs.systemd}/bin/reboot";
-         options = [ "NOPASSWD" ];
+        {
+          command = "${pkgs.systemd}/bin/reboot";
+          options = [ "NOPASSWD" ];
         }
       ];
       groups = [ "wheel" ];
@@ -244,6 +245,7 @@ in
     jdk17
     jdk11
     jdk8
+    corectrl
   ];
 
   system.stateVersion = "21.05"; # Don't change this
