@@ -78,6 +78,7 @@ in
         | prepend /run/current-system/sw/bin
         | prepend /opt/homebrew/bin
         | prepend /opt/homebrew/sbin
+        | prepend /run/wrappers/bin
         | append /Applications/Postgres.app/Contents/Versions/16/bin
         | append /usr/bin/env)
 
