@@ -15,6 +15,7 @@ _:
   "homebrew/cask/docker"
   "insomnia"
   "loom"
+  "microsoft-office"
   "miro"
   "monitorcontrol"
   "ngrok"

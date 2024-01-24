@@ -91,7 +91,6 @@ in
 
       use ${pkgs.nu_scripts}/share/nu_scripts/modules/fnm/fnm.nu
       use ${pkgs.nu_scripts}/share/nu_scripts/modules/nix/nix.nu
-      use ${pkgs.nu_scripts}/share/nu_scripts/modules/git/git.nu
       use ${pkgs.nu_scripts}/share/nu_scripts/modules/network/ssh.nu
 
     '';
@@ -195,6 +194,7 @@ in
       ms-python.vscode-pylance
       rvest.vs-code-prettier-eslint
       tamasfe.even-better-toml
+      gulajavaministudio.mayukaithemevsc
     ];
     # ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     #      {
@@ -210,7 +210,8 @@ in
       "workbench.colorTheme" = "Mayukai Semantic Mirage";
 
       "editor.fontFamily" = "'Fira Code', 'Droid Sans Mono', 'monospace', monospace";
-
+      "extensions.autoCheckUpdates" = false;
+      "update.mode" = "none";
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
       "nix.formatterPath" = "nixpkgs-fmt";
@@ -218,6 +219,9 @@ in
         "nil" = {
           "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
         };
+      };
+      "files.associations" = {
+        ".env*" = "dotenv";
       };
 
       "git.enableCommitSigning" = false;

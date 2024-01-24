@@ -20,13 +20,7 @@ in
   homebrew = {
     enable = true;
     taps = [ ];
-    brews = [
-      # {
-      #   name = "redis";
-      #   start_service = true;
-      #   restart_service = true;
-      # }
-    ];
+    brews = [ ];
     casks = pkgs.callPackage ./casks.nix { };
 
     # These app IDs are from using the mas CLI app
