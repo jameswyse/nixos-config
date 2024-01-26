@@ -3,6 +3,7 @@
 with pkgs;
 let shared-packages = import ../shared/packages.nix { inherit pkgs; }; in
 shared-packages ++ [
+  # pinentry-curses
   adwaita-qt
   appimage-run
   bc # old school calculator
@@ -34,7 +35,6 @@ shared-packages ++ [
   pavucontrol
   pavucontrol # Pulse audio controls
   pcmanfm
-  # pinentry-curses
   pinentry-qt
   playerctl # Control media players from command line
   postgresql

@@ -6,6 +6,9 @@ let
   email = "james@jameswyse.net";
 in
 {
+  # 
+  # Git
+  # 
   git = {
     enable = true;
     ignores = [ "*.swp" ];
@@ -26,104 +29,102 @@ in
     };
   };
 
+  # 
+  # Fish Shell
+  # 
   fish = {
     enable = true;
-    interactiveShellInit = "\n        set fish_greeting\n      ";
-    plugins = [{
-      name = "fzf.fish";
-      src = pkgs.fishPlugins.fzf-fish.src;
-    }];
-    shellInit =
-      "\n        fish_add_path ~/.local/share/bin/\n        fzf_configure_bindings --directory=\\cf\n        fzf_configure_bindings --git_log=\\cg\n        fzf_configure_bindings --git_status=\\cs\n        fzf_configure_bindings --history=\\cr\n        fzf_configure_bindings --variables=\\cv\n        fzf_configure_bindings --processes=\\cp\n      ";
+    shellInit = ''
+      fzf_configure_bindings --directory=\cf
+      fzf_configure_bindings --git_log=\cg
+      fzf_configure_bindings --git_status=\cs
+      fzf_configure_bindings --history=\cr
+      fzf_configure_bindings --variables=\cv
+      fzf_configure_bindings --processes=\cp
+    '';
+    interactiveShellInit = lib.mkMerge [
+      ''
+        set fish_greeting
+        fish_add_path /nix/var/nix/profiles/default/bin 
+        fish_add_path /run/current-system/sw/bin
+        fish_add_path /run/wrappers/bin
+        fish_add_path /usr/bin/env
+
+        alias ls="eza --icons=auto"
+        alias ns="c nixos-config; and nix run .#build-switch"
+      ''
+      (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
+        ''
+          fish_add_path /home/${user}/.apps 
+          fish_add_path /home/${user}/.nix-profile/bin
+          fish_add_path /home/${user}/.local/share/bin/
+        '')
+      (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
+        ''
+          fish_add_path /Users/${user}/.nix-profile/bin 
+          fish_add_path /opt/homebrew/bin
+          fish_add_path /opt/homebrew/sbin
+          fish_add_path /Applications/Postgres.app/Contents/Versions/16/bin
+        '')
+    ];
+    plugins = [
+      {
+        name = "fzf.fish";
+        src = pkgs.fishPlugins.fzf-fish.src;
+      }
+      {
+        name = "jameswyse";
+        src = pkgs.fetchFromGitHub {
+          owner = "jameswyse";
+          repo = "fish-plugins";
+          rev = "e6b27f6a3fdd92386ccb8deede7dc35b9a8bc648";
+          sha256 = "sha256-8H8WuTDCyKVZs3p4x3jCmkBjvjcW1vCoGXnvyzIhR28=";
+        };
+      }
+    ];
+
     shellAbbrs = {
-      hms = "home-manager switch";
-      nrs = "sudo nixos-rebuild switch";
-      psl = "btm --expanded --default_widget_type=proc";
-      pst = "btm --expanded --default_widget_type=proc --tree";
-      sctl = "systemctl";
-      sctlu = "systemctl --user";
+      l = "ls -a";
+      ll = "ls -al";
     };
   };
 
-  nushell = {
-    enable = true;
-    # configFile.source = ./.../config.nu;
-    extraConfig = ''
-      let carapace_completer = {|spans|
-        carapace $spans.0 nushell $spans | from json
-      }
-
-      $env.config = {
-        show_banner: false,
-        completions: {
-          case_sensitive: false # case-sensitive completions
-          quick: true    # set to false to prevent auto-selecting completions
-          partial: true    # set to false to prevent partial filling of the prompt
-          algorithm: "fuzzy"    # prefix or fuzzy
-          external: {
-            # set to false to prevent nushell looking into $env.PATH to find more suggestions
-            enable: true 
-            # set to lower can improve completion performance at the cost of omitting some options
-            max_results: 100 
-            completer: $carapace_completer # check 'carapace_completer' 
-          }
-        }
-      }
-
-      $env.PATH = ($env.PATH | split row (char esep)
-        | prepend /home/james/.apps 
-        | prepend /home/james/.nix-profile/bin
-        | prepend /Users/james/.nix-profile/bin 
-        | prepend /nix/var/nix/profiles/default/bin 
-        | prepend /run/current-system/sw/bin
-        | prepend /opt/homebrew/bin
-        | prepend /opt/homebrew/sbin
-        | prepend /run/wrappers/bin
-        | append /Applications/Postgres.app/Contents/Versions/16/bin
-        | append /usr/bin/env)
-
-      $env.HOMEBREW_PREFIX = "/opt/homebrew"
-      $env.HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
-      $env.HOMEBREW_REPOSITORY = "/opt/homebrew/Library/.homebrew-is-managed-by-nix"
-
-      def projects [] { (ls ~/Projects | get name | path basename) }
-      def --env c [project: string@projects = ""] { cd $'~/Projects/($project)' }
-
-      use ${pkgs.nu_scripts}/share/nu_scripts/modules/fnm/fnm.nu
-      use ${pkgs.nu_scripts}/share/nu_scripts/modules/nix/nix.nu
-      use ${pkgs.nu_scripts}/share/nu_scripts/modules/network/ssh.nu
-
-    '';
-    shellAliases = { };
-  };
-
-  carapace = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
+  # 
+  # Starship Prompt
+  # 
   starship = {
     enable = true;
-    enableNushellIntegration = true;
+    enableFishIntegration = true;
     settings = pkgs.lib.importTOML ../../config/starship.toml;
   };
 
+  # 
+  # fzf - fuzzy finder
+  # 
   fzf.enable = true;
 
+  # 
+  # tealdeer - tldr command
+  # 
   tealdeer = {
     enable = true;
     settings = { auto_update = true; };
   };
 
+  # 
+  # Zoxide - z command to quickly jump to directories
+  # 
   zoxide = {
     enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
   };
 
+  # 
+  # SSH
+  # 
   ssh = {
     enable = true;
-
     extraConfig = lib.mkMerge [
       ''
         Host github.com
@@ -141,6 +142,9 @@ in
     ];
   };
 
+  # 
+  # Kitty terminal
+  # 
   kitty = {
     enable = true;
     shellIntegration.enableFishIntegration = true;
@@ -160,16 +164,16 @@ in
       allow_remote_control = "yes";
       shell_integration = "enabled";
       macos_option_as_alt = "yes";
-      #shell = "fish";
       enabled_layouts = "fat:bias=50;full_size=1;mirrored=false";
     };
     theme = "Dracula";
   };
 
+  # 
+  # VSCode editor
+  # 
   vscode = {
     enable = true;
-    #package = pkgs.vscodium;
-
     enableExtensionUpdateCheck = false;
     enableUpdateCheck = false;
     mutableExtensionsDir = false;
@@ -196,14 +200,6 @@ in
       tamasfe.even-better-toml
       gulajavaministudio.mayukaithemevsc
     ];
-    # ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-    #      {
-    #        name = "mayukaithemevsc";
-    #        publisher = "GulajavaMinistudio";
-    #        version = "3.2.3";
-    #        sha256 = "a0f3c30a3d16e06c31766fbe2c746d80683b6211638b00b0753983a84fbb9dad";
-    #      }
-    #    ];
 
     userSettings = {
       "workbench.iconTheme" = "catppuccin-macchiato";
@@ -227,92 +223,22 @@ in
       "git.enableCommitSigning" = false;
       "editor.formatOnPaste" = true;
       "editor.formatOnSave" = true;
-      #      "files.autoSave" = "afterDelay";
-      #      "files.autoSaveDelay" = 100;
+      "[javascript]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[typescriptreact]" = {
+        "editor.defaultFormatter" = "vscode.typescript-language-features";
+      };
+      "editor.tokenColorCustomizations" = {
+        "textMateRules" = [
+          {
+            "scope" = "keyword.other.dotenv";
+            "settings" = {
+              "foreground" = "#FF000000";
+            };
+          }
+        ];
+      };
     };
-  };
-
-  tmux = {
-    enable = true;
-    plugins = with pkgs.tmuxPlugins; [
-      vim-tmux-navigator
-      sensible
-      yank
-      prefix-highlight
-      {
-        plugin = power-theme;
-        extraConfig = ''
-          set -g @tmux_power_theme 'gold'
-        '';
-      }
-      {
-        plugin = resurrect; # Used by tmux-continuum
-
-        # Use XDG data directory
-        # https://github.com/tmux-plugins/tmux-resurrect/issues/348
-        extraConfig = ''
-          set -g @resurrect-dir '$HOME/.cache/tmux/resurrect'
-          set -g @resurrect-capture-pane-contents 'on'
-          set -g @resurrect-pane-contents-area 'visible'
-        '';
-      }
-      {
-        plugin = continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '5' # minutes
-        '';
-      }
-    ];
-    terminal = "screen-256color";
-    prefix = "C-x";
-    escapeTime = 10;
-    historyLimit = 50000;
-    extraConfig = ''
-      # Remove Vim mode delays
-      set -g focus-events on
-
-      # Enable full mouse support
-      set -g mouse on
-
-      # -----------------------------------------------------------------------------
-      # Key bindings
-      # -----------------------------------------------------------------------------
-
-      # Unbind default keys
-      unbind C-b
-      unbind '"'
-      unbind %
-
-      # Split panes, vertical or horizontal
-      bind-key x split-window -v
-      bind-key v split-window -h
-
-      # Move around panes with vim-like bindings (h,j,k,l)
-      bind-key -n M-k select-pane -U
-      bind-key -n M-h select-pane -L
-      bind-key -n M-j select-pane -D
-      bind-key -n M-l select-pane -R
-
-      # Smart pane switching with awareness of Vim splits.
-      # This is copy paste from https://github.com/christoomey/vim-tmux-navigator
-      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-        | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
-      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
-      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
-      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
-      tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
-      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
-
-      bind-key -T copy-mode-vi 'C-h' select-pane -L
-      bind-key -T copy-mode-vi 'C-j' select-pane -D
-      bind-key -T copy-mode-vi 'C-k' select-pane -U
-      bind-key -T copy-mode-vi 'C-l' select-pane -R
-      bind-key -T copy-mode-vi 'C-\' select-pane -l
-    '';
   };
 }

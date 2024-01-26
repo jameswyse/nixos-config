@@ -11,9 +11,11 @@ with pkgs; [
   bat
   cmatrix
   coreutils
+  coreutils-prefixed
   cowsay
   dejavu_fonts
   dina-font
+  eza
   fd
   feather-font # from overlay
   ffmpeg
@@ -51,8 +53,6 @@ with pkgs; [
   noto-fonts
   noto-fonts-cjk
   noto-fonts-emoji
-  nu_scripts
-  nushell
   openssh
   pandoc
   python39

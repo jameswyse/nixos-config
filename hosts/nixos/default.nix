@@ -184,7 +184,7 @@ in
         "wheel"
         "docker"
       ];
-      shell = pkgs.nushell;
+      shell = pkgs.fish;
       openssh.authorizedKeys.keys = keys;
     };
 
