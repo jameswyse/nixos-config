@@ -49,6 +49,7 @@ in
         fish_add_path /run/current-system/sw/bin
         fish_add_path /run/wrappers/bin
         fish_add_path /usr/bin/env
+        set -a fish_user_paths ./node_modules/.bin
 
         alias ls="eza --icons=auto"
         alias ns="c nixos-config; and nix run .#build-switch"
@@ -179,26 +180,27 @@ in
     mutableExtensionsDir = false;
 
     extensions = with vscode-extensions.vscode-marketplace; [
-      jnoortheen.nix-ide
+      adpyke.vscode-sql-formatter
       catppuccin.catppuccin-vsc
       catppuccin.catppuccin-vsc-icons
-      roman.ayu-next
-      adpyke.vscode-sql-formatter
       dbaeumer.vscode-eslint
       dotenv.dotenv-vscode
       dsznajder.es7-react-js-snippets
       eamodio.gitlens
       ecmel.vscode-html-css
       esbenp.prettier-vscode
+      gulajavaministudio.mayukaithemevsc
+      jnoortheen.nix-ide
       mgmcdermott.vscode-language-babel
       mquandalle.graphql
       ms-azuretools.vscode-docker
       ms-python.isort
       ms-python.python
       ms-python.vscode-pylance
+      roman.ayu-next
       rvest.vs-code-prettier-eslint
       tamasfe.even-better-toml
-      gulajavaministudio.mayukaithemevsc
+      rjmacarthy.twinny
     ];
 
     userSettings = {

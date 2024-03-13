@@ -9,6 +9,7 @@ _:
   "discord"
   "drawio"
   "figma"
+  "firefox"
   "github"
   "google-chrome"
   "google-drive"
