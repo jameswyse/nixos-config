@@ -55,8 +55,8 @@ with pkgs; [
   noto-fonts-emoji
   openssh
   pandoc
-  python39
-  python39Packages.virtualenv # globally install virtualenv
+  python311
+  python311Packages.virtualenv # globally install virtualenv
   ranger
   ripgrep
   sqlite

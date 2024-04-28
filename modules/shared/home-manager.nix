@@ -66,6 +66,8 @@ in
           fish_add_path /opt/homebrew/bin
           fish_add_path /opt/homebrew/sbin
           fish_add_path /Applications/Postgres.app/Contents/Versions/16/bin
+          
+          if [ -f '/Users/${user}/google-cloud-sdk/path.fish.inc' ]; . '/Users/${user}/google-cloud-sdk/path.fish.inc'; end
         '')
     ];
     plugins = [
