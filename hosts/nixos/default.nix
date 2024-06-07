@@ -60,7 +60,7 @@ in
     nixPath = [ "nixos-config=/home/${user}/.local/share/src/nixos-config:/etc/nixos" ];
     settings.allowed-users = [ "${user}" ];
     settings.auto-optimise-store = true;
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes auto-allocate-uids
     '';
