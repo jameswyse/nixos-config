@@ -25,6 +25,7 @@ with pkgs; [
   flyctl
   fnm
   font-awesome
+  gh
   git-crypt
   git-lfs
   gnupg
