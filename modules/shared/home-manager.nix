@@ -52,7 +52,7 @@ in
         set -a fish_user_paths ./node_modules/.bin
 
         alias ls="eza --icons=auto"
-        alias ns="c nixos-config; and nix run .#build-switch"
+        alias ns="c nixos/nixos-config; and nix run .#build-switch"
       ''
       (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
         ''
@@ -183,6 +183,8 @@ in
 
     extensions = with vscode-extensions.vscode-marketplace; [
       adpyke.vscode-sql-formatter
+      alefragnani.project-manager
+      bradlc.vscode-tailwindcss
       catppuccin.catppuccin-vsc
       catppuccin.catppuccin-vsc-icons
       dbaeumer.vscode-eslint
@@ -202,13 +204,11 @@ in
       roman.ayu-next
       rvest.vs-code-prettier-eslint
       tamasfe.even-better-toml
-      rjmacarthy.twinny
     ];
 
     userSettings = {
       "workbench.iconTheme" = "catppuccin-macchiato";
       "workbench.colorTheme" = "Mayukai Semantic Mirage";
-
       "editor.fontFamily" = "'Fira Code', 'Droid Sans Mono', 'monospace', monospace";
       "extensions.autoCheckUpdates" = false;
       "update.mode" = "none";
@@ -222,6 +222,7 @@ in
       };
       "files.associations" = {
         ".env*" = "dotenv";
+        "*.css" = "tailwindcss";
       };
 
       "git.enableCommitSigning" = false;
@@ -230,8 +231,20 @@ in
       "[javascript]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
+      "[typescript]" = {
+        "editor.defaultFormatter" = "vscode.typescript-language-features";
+      };
       "[typescriptreact]" = {
         "editor.defaultFormatter" = "vscode.typescript-language-features";
+      };
+      "[css]" = {
+        "editor.defaultFormatter" = "vscode.css-language-features";
+      };
+      "[json]" = {
+        "editor.defaultFormatter" = "vscode.json-language-features";
+      };
+      "editor.quickSuggestions" = {
+        "strings" = "on";
       };
       "editor.tokenColorCustomizations" = {
         "textMateRules" = [
@@ -243,6 +256,10 @@ in
           }
         ];
       };
+      "projectManager.projectsLocation" = "~/Projects";
+      "projectManager.git.baseFolders" = [
+        "~/Projects"
+      ];
     };
   };
 }
