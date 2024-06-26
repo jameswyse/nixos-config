@@ -57,9 +57,6 @@ let user = "james"; in
     agenix.packages."${pkgs.system}".default
   ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
 
-  # Enable fonts dir
-  fonts.fontDir.enable = true;
-
   system = {
     stateVersion = 4;
 
