@@ -177,8 +177,8 @@ in
   # 
   vscode = {
     enable = true;
-    enableExtensionUpdateCheck = false;
-    enableUpdateCheck = false;
+    enableExtensionUpdateCheck = true;
+    enableUpdateCheck = true;
     mutableExtensionsDir = false;
 
     extensions = with vscode-extensions.vscode-marketplace; [
