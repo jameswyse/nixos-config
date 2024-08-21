@@ -202,8 +202,9 @@ in
       ms-python.python
       ms-python.vscode-pylance
       roman.ayu-next
-      rvest.vs-code-prettier-eslint
+      # rvest.vs-code-prettier-eslint
       tamasfe.even-better-toml
+      bradlc.vscode-tailwindcss
     ];
 
     userSettings = {
@@ -228,20 +229,28 @@ in
       "git.enableCommitSigning" = false;
       "editor.formatOnPaste" = true;
       "editor.formatOnSave" = true;
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "javascript.updateImportsOnFileMove.enabled" = "always";
       "[javascript]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
+      "[javascriptreact]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
       "[typescript]" = {
-        "editor.defaultFormatter" = "vscode.typescript-language-features";
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
       "[typescriptreact]" = {
-        "editor.defaultFormatter" = "vscode.typescript-language-features";
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
       "[css]" = {
-        "editor.defaultFormatter" = "vscode.css-language-features";
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[scss]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
       "[json]" = {
-        "editor.defaultFormatter" = "vscode.json-language-features";
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
       "editor.quickSuggestions" = {
         "strings" = "on";
