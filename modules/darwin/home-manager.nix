@@ -33,7 +33,7 @@ in
     # $ mas search <app name>
     #
     masApps = {
-      "harvest" = 506189836;
+      # "harvest" = 506189836;
     };
   };
 
