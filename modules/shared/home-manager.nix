@@ -129,19 +129,20 @@ in
   ssh = {
     enable = true;
     extraConfig = lib.mkMerge [
-      ''
-        Host github.com
-          Hostname github.com
-          IdentitiesOnly yes
-      ''
       (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
         ''
           IdentityFile /home/${user}/.ssh/id_ed25519
         '')
       (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
         ''
+          IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
           IdentityFile /Users/${user}/.ssh/id_ed25519
         '')
+            ''
+      Host github.com
+        Hostname github.com
+        IdentitiesOnly yes
+      ''
     ];
   };
 
