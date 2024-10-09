@@ -170,7 +170,7 @@ in
       macos_option_as_alt = "yes";
       enabled_layouts = "fat:bias=50;full_size=1;mirrored=false";
     };
-    theme = "Dracula";
+    themeFile = "Dracula";
   };
 
   # 
@@ -267,9 +267,11 @@ in
         ];
       };
       "projectManager.projectsLocation" = "~/Projects";
-      "projectManager.git.baseFolders" = [
-        "~/Projects"
-      ];
+      # "projectManager.git.baseFolders" = [
+      #   "~/Projects"
+      # ];
+      "typescript.updateImportsOnFileMove.enabled" = "always";
+      "explorer.confirmDragAndDrop" = false;
     };
   };
 }
