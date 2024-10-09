@@ -98,7 +98,7 @@ in
         { path = "/Applications/Spark Desktop.app/"; }
         { path = "/Applications/Slack.app/"; }
         { path = "/Applications/Google Chrome.app/"; }
-        { path = "/Applications/Visual Studio Code.app/"; }
+        { path = "${pkgs.vscode}/Applications/Visual Studio Code.app/"; }
         { path = "${pkgs.kitty}/Applications/Kitty.app/"; }
         { path = "/Applications/GitHub Desktop.app/"; }
         { path = "/Applications/Postman.app/"; }
