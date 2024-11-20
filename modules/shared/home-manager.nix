@@ -51,6 +51,8 @@ in
         fish_add_path /usr/bin/env
         set -a fish_user_paths ./node_modules/.bin
 
+        fnm env --use-on-cd --corepack-enabled --shell fish | source
+
         alias ls="eza --icons=auto"
         alias ns="c nixos/nixos-config; and nix run .#build-switch"
       ''

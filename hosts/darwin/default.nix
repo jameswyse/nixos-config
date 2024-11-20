@@ -40,12 +40,12 @@ let user = "james"; in
   services.redis.enable = true;
   services.redis.dataDir = "/var/lib/redis";
 
-  users.users = {
-    ${user} = {
-      shell = pkgs.fish;
-      # openssh.authorizedKeys.keys = keys;
-    };
-  };
+  # users.users = {
+  #   ${user} = {
+  #     shell = pkgs.fish;
+  #     # openssh.authorizedKeys.keys = keys;
+  #   };
+  # };
 
   environment.shells = with pkgs; [ fish ];
 

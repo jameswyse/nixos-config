@@ -52,7 +52,7 @@ with pkgs; [
   nodePackages.npm # globally install npm
   nodePackages.prettier
   noto-fonts
-  noto-fonts-cjk
+  noto-fonts-cjk-sans
   noto-fonts-emoji
   openssh
   pandoc
