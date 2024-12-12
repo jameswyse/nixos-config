@@ -82,10 +82,6 @@ in
           sudo cat ${(pkgs.formats.json {}).generate "vscode-settings" programs.vscode.userSettings} > "$userDir/settings.json"
         '';
       };
-
-      # Marked broken Oct 20, 2022 check later to remove this
-      # https://github.com/nix-community/home-manager/issues/3344
-      # manual.manpages.enable = false;
     };
   };
 

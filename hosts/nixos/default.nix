@@ -221,8 +221,7 @@ in
     noto-fonts-emoji
     dina-font
     proggyfonts
-    nerdfonts
-  ];
+  ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   environment.systemPackages = with pkgs; [
     agenix.packages."${pkgs.system}".default # "x86_64-linux"

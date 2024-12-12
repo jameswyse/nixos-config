@@ -208,6 +208,7 @@ in
       # rvest.vs-code-prettier-eslint
       tamasfe.even-better-toml
       bradlc.vscode-tailwindcss
+      mattpocock.ts-error-translator
     ];
 
     userSettings = {

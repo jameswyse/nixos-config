@@ -1,7 +1,7 @@
 { pkgs }:
 
 with pkgs; [
-  _1password
+  _1password-cli
   act
   age
   aspell
@@ -43,7 +43,6 @@ with pkgs; [
   libfido2
   meslo-lgs-nf
   neofetch
-  nerdfonts
   ngrok
   nil # Nix LSP
   nixpkgs-fmt
@@ -69,4 +68,5 @@ with pkgs; [
   wget
   yarn
   zip
-]
+] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts)
+
