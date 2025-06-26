@@ -26,6 +26,9 @@ in
       commit.gpgsign = false;
       pull.rebase = true;
       rebase.autoStash = true;
+      credential.helper = "manager";
+      credential."https://github.com".username = "jameswyse";
+      extraConfig.credential.credentialStore = "cache";
     };
   };
 
@@ -49,7 +52,9 @@ in
         fish_add_path /run/current-system/sw/bin
         fish_add_path /run/wrappers/bin
         fish_add_path /usr/bin/env
+        fish_add_path /Users/james/.npm-packages/bin
         set -a fish_user_paths ./node_modules/.bin
+        set -x TERM xterm-256color
 
         fnm env --use-on-cd --corepack-enabled --shell fish | source
 
@@ -70,6 +75,11 @@ in
           fish_add_path /Applications/Postgres.app/Contents/Versions/16/bin
           
           if [ -f '/Users/${user}/google-cloud-sdk/path.fish.inc' ]; . '/Users/${user}/google-cloud-sdk/path.fish.inc'; end
+
+          set -gx PNPM_HOME "/Users/${user}/Library/pnpm"
+          if not string match -q -- $PNPM_HOME $PATH
+            set -gx PATH "$PNPM_HOME" $PATH
+          end
         '')
     ];
     plugins = [
@@ -148,133 +158,144 @@ in
     ];
   };
 
-  # 
-  # Kitty terminal
-  # 
-  kitty = {
-    enable = true;
-    shellIntegration.enableFishIntegration = true;
-    settings = {
-      background_opacity = "0.9";
-      font_size = "10.0";
-      font_family = "FiraCode Nerd Font";
-      bold_font = "auto";
-      italic_font = "auto";
-      bold_italic_font = "auto";
-      enable_audio_bell = false;
-      tab_bar_style = "powerline";
-      tab_powerline_style = "slanted";
-      tab_bar_edge = "top";
-      tab_bar_margin_height = "0.0 0.0";
-      scrollback_lines = -1;
-      allow_remote_control = "yes";
-      shell_integration = "enabled";
-      macos_option_as_alt = "yes";
-      enabled_layouts = "fat:bias=50;full_size=1;mirrored=false";
-    };
-    themeFile = "Dracula";
-  };
+  # ghostty = {
+  #   enable = true;
+  #   enableZshIntegration = true;
 
-  # 
-  # VSCode editor
-  # 
-  vscode = {
-    enable = true;
-    enableExtensionUpdateCheck = true;
-    enableUpdateCheck = true;
-    mutableExtensionsDir = false;
+  #   settings = {
+  #     auto-update = "off";
+  #     font-size = 13;
+  #     font-feature = "-liga";
+  #     # font-family = "FiraCode Nerd Font Mono";
+  #     shell-integration-features = "sudo";
+  #   };
+  # };
 
-    extensions = with vscode-extensions.vscode-marketplace; [
-      adpyke.vscode-sql-formatter
-      alefragnani.project-manager
-      bradlc.vscode-tailwindcss
-      catppuccin.catppuccin-vsc
-      catppuccin.catppuccin-vsc-icons
-      dbaeumer.vscode-eslint
-      dotenv.dotenv-vscode
-      dsznajder.es7-react-js-snippets
-      eamodio.gitlens
-      ecmel.vscode-html-css
-      esbenp.prettier-vscode
-      gulajavaministudio.mayukaithemevsc
-      jnoortheen.nix-ide
-      mgmcdermott.vscode-language-babel
-      mquandalle.graphql
-      ms-azuretools.vscode-docker
-      ms-python.isort
-      ms-python.python
-      ms-python.vscode-pylance
-      roman.ayu-next
-      # rvest.vs-code-prettier-eslint
-      tamasfe.even-better-toml
-      bradlc.vscode-tailwindcss
-      mattpocock.ts-error-translator
-    ];
+  # vscode = {
+  #   enable = true;
+  #   mutableExtensionsDir = true;
+  #   profiles = {
+  #     default = {
+  #       enableExtensionUpdateCheck = true;
+  #       enableUpdateCheck = true;
+  #       extensions = [
+  #         vscode-extensions.vscode-marketplace.alefragnani.project-manager
+  #         vscode-extensions.open-vsx.anysphere.pyright
+  #         vscode-extensions.vscode-marketplace.bradlc.vscode-tailwindcss
+  #         vscode-extensions.vscode-marketplace.catppuccin.catppuccin-vsc
+  #         vscode-extensions.vscode-marketplace.catppuccin.catppuccin-vsc-icons
+  #         vscode-extensions.vscode-marketplace.dbaeumer.vscode-eslint
+  #         vscode-extensions.vscode-marketplace.dotenv.dotenv-vscode
+  #         vscode-extensions.vscode-marketplace.dsznajder.es7-react-js-snippets
+  #         vscode-extensions.vscode-marketplace.eamodio.gitlens
+  #         vscode-extensions.vscode-marketplace.ecmel.vscode-html-css
+  #         vscode-extensions.vscode-marketplace.esbenp.prettier-vscode
+  #         vscode-extensions.vscode-marketplace.github.vscode-github-actions
+  #         vscode-extensions.vscode-marketplace.gulajavaministudio.mayukaithemevsc
+  #         vscode-extensions.vscode-marketplace.jnoortheen.nix-ide
+  #         vscode-extensions.vscode-marketplace.lokalise.i18n-ally
+  #         vscode-extensions.vscode-marketplace.mattpocock.ts-error-translator
+  #         vscode-extensions.vscode-marketplace.mgmcdermott.vscode-language-babel
+  #         vscode-extensions.vscode-marketplace.mquandalle.graphql
+  #         # vscode-extensions.vscode-marketplace.ms-azuretools.vscode-docker
+  #         # vscode-extensions.vscode-marketplace.ms-python.isort
+  #         # vscode-extensions.vscode-marketplace.ms-python.python
+  #         # vscode-extensions.vscode-marketplace.ms-python.vscode-pylance
+  #         vscode-extensions.vscode-marketplace.roman.ayu-next
+  #         vscode-extensions.vscode-marketplace.tamasfe.even-better-toml
+  #       ];
 
-    userSettings = {
-      "workbench.iconTheme" = "catppuccin-macchiato";
-      "workbench.colorTheme" = "Mayukai Semantic Mirage";
-      "editor.fontFamily" = "'Fira Code', 'Droid Sans Mono', 'monospace', monospace";
-      "extensions.autoCheckUpdates" = false;
-      "update.mode" = "none";
-      "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "nil";
-      "nix.formatterPath" = "nixpkgs-fmt";
-      "nix.serverSettings" = {
-        "nil" = {
-          "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
-        };
-      };
-      "files.associations" = {
-        ".env*" = "dotenv";
-        "*.css" = "tailwindcss";
-      };
+  #       userSettings = {
+  #         "workbench.iconTheme" = "catppuccin-macchiato";
+  #         "workbench.colorTheme" = "Mayukai Semantic Mirage";
+  #         "editor.fontFamily" = "'Fira Code', 'Droid Sans Mono', 'monospace', monospace";
+  #         "extensions.autoCheckUpdates" = false;
+  #         "update.mode" = "none";
+  #         "nix.enableLanguageServer" = true;
+  #         "nix.serverPath" = "nil";
+  #         "nix.formatterPath" = "nixpkgs-fmt";
+  #         "nix.serverSettings" = {
+  #           "nil" = {
+  #             "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
+  #           };
+  #         };
+  #         "files.associations" = {
+  #           ".env*" = "dotenv";
+  #           "*.css" = "tailwindcss";
+  #         };
+  #         "cursor.aipreview.enabled" = true;
+  #         "workbench.activityBar.orientation" = "vertical";
+  #         "git.enableCommitSigning" = false;
+  #         "editor.formatOnPaste" = true;
+  #         "editor.formatOnSave" = true;
+  #         "editor.defaultFormatter" = "esbenp.prettier-vscode";
+  #         "javascript.updateImportsOnFileMove.enabled" = "always";
+  #         "[javascript]" = {
+  #           "editor.defaultFormatter" = "esbenp.prettier-vscode";
+  #         };
+  #         "[javascriptreact]" = {
+  #           "editor.defaultFormatter" = "esbenp.prettier-vscode";
+  #         };
+  #         "[typescript]" = {
+  #           "editor.defaultFormatter" = "esbenp.prettier-vscode";
+  #         };
+  #         "[typescriptreact]" = {
+  #           "editor.defaultFormatter" = "esbenp.prettier-vscode";
+  #         };
+  #         "[css]" = {
+  #           "editor.defaultFormatter" = "esbenp.prettier-vscode";
+  #         };
+  #         "[scss]" = {
+  #           "editor.defaultFormatter" = "esbenp.prettier-vscode";
+  #         };
+  #         "[json]" = {
+  #           "editor.defaultFormatter" = "esbenp.prettier-vscode";
+  #         };
+  #         "[sql]" = {
+  #           "editor.defaultFormatter" = "adpyke.vscode-sql-formatter";
+  #         };
+  #         "editor.quickSuggestions" = {
+  #           "strings" = "on";
+  #         };
+  #         "editor.tokenColorCustomizations" = {
+  #           "textMateRules" = [
+  #             {
+  #               "scope" = "keyword.other.dotenv";
+  #               "settings" = {
+  #                 "foreground" = "#FF000000";
+  #               };
+  #             }
+  #           ];
+  #         };
+  #         "projectManager.projectsLocation" = "~/Projects";
+  #         "typescript.updateImportsOnFileMove.enabled" = "always";
+  #         "explorer.confirmDragAndDrop" = false;
+  #         "prettier.experimentalTernaries" = true;
+  #         "totalTypeScript.hideAllTips" = true;
+  #         "totalTypeScript.hideBasicTips" = true;
+  #         "dotenv.enableAutocloaking" = false;
+  #         "totalTypeScript.hiddenTips" = [
+  #           "passing-generics-to-types"
+  #           "in-operator-narrowing"
+  #           "typeof"
+  #           "readonly-utility-type"
+  #           "returntype-utility-type"
+  #           "partial-utility-type"
+  #           "omit-utility-type"
+  #           "record-utility-type"
+  #         ];
+  #         "i18n-ally.enabledFrameworks" = ["next-intl"];
+  #         "i18n-ally.keystyle" = "nested";
+  #         "i18n-ally.editor.preferEditor" = true;
+  #         "i18n-ally.extract.keyMaxLength" = 9999999;
+  #         "i18n-ally.annotationInPlace" = false;
+  #         "i18n-ally.annotations" = false;
+  #         "i18n-ally.displayLanguage" = "en-AU";
+  #         "i18n-ally.extract.autoDetect" = true;
+  #         "i18n-ally.sourceLanguage" = "en-AU";
 
-      "git.enableCommitSigning" = false;
-      "editor.formatOnPaste" = true;
-      "editor.formatOnSave" = true;
-      "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      "javascript.updateImportsOnFileMove.enabled" = "always";
-      "[javascript]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      "[javascriptreact]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      "[typescript]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      "[typescriptreact]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      "[css]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      "[scss]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      "[json]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      "editor.quickSuggestions" = {
-        "strings" = "on";
-      };
-      "editor.tokenColorCustomizations" = {
-        "textMateRules" = [
-          {
-            "scope" = "keyword.other.dotenv";
-            "settings" = {
-              "foreground" = "#FF000000";
-            };
-          }
-        ];
-      };
-      "projectManager.projectsLocation" = "~/Projects";
-      # "projectManager.git.baseFolders" = [
-      #   "~/Projects"
-      # ];
-      "typescript.updateImportsOnFileMove.enabled" = "always";
-      "explorer.confirmDragAndDrop" = false;
-    };
-  };
+  #       };
+  #     };
+  #   };
+  # };
 }

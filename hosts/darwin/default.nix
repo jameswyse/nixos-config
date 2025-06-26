@@ -12,16 +12,13 @@ let user = "james"; in
     agenix.darwinModules.default
   ];
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
   # Setup user, packages, programs
   nix = {
+    enable = true;
     package = pkgs.nixVersions.latest;
     settings.trusted-users = [ "@admin" "${user}" ];
 
     gc = {
-      user = "root";
       automatic = true;
       interval = { Weekday = 0; Hour = 2; Minute = 0; };
       options = "--delete-older-than 30d";
@@ -32,6 +29,13 @@ let user = "james"; in
       experimental-features = nix-command flakes auto-allocate-uids
     '';
   };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowBroken = true;
+    allowInsecure = false;
+    allowUnsupportedSystem = true;
+  }; 
 
   programs = {
     fish.enable = true;
@@ -59,6 +63,7 @@ let user = "james"; in
 
   system = {
     stateVersion = 4;
+    primaryUser = user;
 
     defaults = {
       NSGlobalDomain = {

@@ -13,10 +13,10 @@ SYSTEM="darwinConfigurations.$FLAKE.system"
 export NIXPKGS_ALLOW_UNFREE=1
 
 echo "${YELLOW}Starting build...${NC}"
-/run/current-system/sw/bin/nix --experimental-features 'nix-command flakes auto-allocate-uids' build .#$SYSTEM $@
+/run/current-system/sw/bin/nix --experimental-features 'nix-command flakes auto-allocate-uids' build --impure .#$SYSTEM $@
 
 echo "${YELLOW}Switching to new generation...${NC}"
-./result/sw/bin/darwin-rebuild switch --flake .#$FLAKE $@
+sudo ./result/sw/bin/darwin-rebuild switch --impure --flake .#$FLAKE $@
 
 echo "${YELLOW}Cleaning up...${NC}"
 unlink ./result

@@ -10,6 +10,7 @@ with pkgs; [
   bash-completion
   bat
   cmatrix
+  code-cursor
   coreutils
   coreutils-prefixed
   cowsay
@@ -26,6 +27,8 @@ with pkgs; [
   fnm
   font-awesome
   gh
+  git
+  git-credential-manager
   git-crypt
   git-lfs
   gnupg
@@ -41,6 +44,7 @@ with pkgs; [
   kitty
   liberation_ttf
   libfido2
+  libpng
   meslo-lgs-nf
   neofetch
   ngrok
@@ -68,5 +72,6 @@ with pkgs; [
   wget
   yarn
   zip
+  # orca-slicer
 ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts)
 

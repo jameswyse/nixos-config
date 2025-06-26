@@ -26,7 +26,11 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.config.allowUnfree = true;
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -87,6 +91,14 @@
           system = "aarch64-darwin";
           specialArgs = { inherit user; } // inputs;
           modules = [
+            { 
+              nixpkgs.config = {
+                allowUnfree = true;
+                allowBroken = true;
+                allowInsecure = false;
+                allowUnsupportedSystem = true;
+              }; 
+            }
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
             {
